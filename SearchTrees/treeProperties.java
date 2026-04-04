@@ -22,6 +22,7 @@ public class Main
         // System.out.println(height(root, 10));
         System.out.println(leaves(root));
         System.out.println(averageDegree(root));
+        System.out.println(search(root, 2));
 	}
 	
 	public static int depth(Node binaryTree, int target){
@@ -95,6 +96,85 @@ public class Main
 	    int n = numberOfNodes(root);
 	    if(n == 0) return 0;
 	    return (double) (n-1)/n;
+	}
+	
+	public static int search(Node root, int elem){
+	    // Recursion Approach
+	   // if(root == null){
+	   //     return -1;
+	   // }
+	   // if (root.data == elem){
+	   //     return root.data;
+	   // }
+	   // else if(root.data > elem){
+	   //     return search(root.left, elem);
+	   // }
+	   // else if(root.data < elem){
+	   //     return search(root.right, elem);
+	   // }
+	    // Looping Approach
+	    while(root != null){
+	        if(root.data == elem){
+	            return root.data;
+	        }
+	        else if(root.data < elem){
+	            root=root.right;
+	        }
+	        else{
+	            root=root.left;
+	        }
+	    }
+	    return -1;
+	}
+	
+	public static boolean insert(Node root, int e){
+	    Node toInsert = new Node(e);
+	    
+	    Node copyRoot = root;
+	    // Find the correct position to insert
+	    while(copyRoot!=null){
+	        if(copyRoot.data == e){
+	            return false;
+	        }
+	        else if (){
+	            
+	        }
+	    }
+	    // 3 cases, insert at the left subtree having childs, right subtree having childs, insert directly at leaf
+	    
+	    
+	}
+	
+	public static boolean delete(Node root, int e){
+	    Node copyRoot = root;
+	    // Find the target element to delete
+	    while(copyRoot!=null){
+	    // 3 cases, delete node having 0 child, delete node having 1 child, delete node having 2 children
+	        if(copyRoot.data == e){
+	            // is a leaf
+	            if (copyRoot.left == null && copyRoot.right == null){
+	                copyRoot = null;
+	            }
+	            // having 2 children
+	            else if(copyRoot.left != null && copyRoot.right != null){
+	                
+	            }
+	            // having a child
+	            else{
+	                if (copyRoot.left == null){
+	                    copyRoot = copyRoot.right;
+	                }
+	            }
+	        }
+	        else if (copyRoot.data>e){
+	            copyRoot=copyRoot.left;
+	        }
+	        else{
+	            copyRoot=copyRoot.right;
+	        }
+	    }
+	    
+	    
 	}
 	
 }
