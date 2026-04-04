@@ -15,8 +15,13 @@ public class Main
         root.right.left = new Node(12);
         root.right.right = new Node(20);
         
-        System.out.println(depth(root, 15));
-        System.out.println(height(root, 10));
+        
+        // root.left.left.left = new Node(1);
+        
+        // System.out.println(depth(root, 15));
+        // System.out.println(height(root, 10));
+        System.out.println(leaves(root));
+        System.out.println(averageDegree(root));
 	}
 	
 	public static int depth(Node binaryTree, int target){
@@ -58,5 +63,38 @@ public class Main
 	}
 	
 	// Calculating Leaves of the Binary tree
+	
+	public static int leaves(Node root){
+	    if(root == null){
+	        return 0;
+	    }
+	    int left = 0, right = 0;
+	    if (root.left == null && root.right == null) {
+	        return 1;
+	    }
+	    if(root.left != null){
+	        left = leaves(root.left);
+	    }
+	    if(root.right != null){
+	        right = leaves(root.right);
+	    }
+	    return left+right;
+	}
+	
+	// Caculate Average Degree of Binary Tree by taking help of numberOfNodes
+    public static int numberOfNodes(Node root){
+        if(root == null){
+            return 0;
+        }
+        int left = numberOfNodes(root.left);
+        int right = numberOfNodes(root.right);
+        return left + right + 1;
+    }	
+	
+	public static double averageDegree(Node root){
+	    int n = numberOfNodes(root);
+	    if(n == 0) return 0;
+	    return (double) (n-1)/n;
+	}
 	
 }
