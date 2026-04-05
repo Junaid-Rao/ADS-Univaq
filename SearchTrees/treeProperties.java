@@ -20,9 +20,20 @@ public class Main
         
         // System.out.println(depth(root, 15));
         // System.out.println(height(root, 10));
-        System.out.println(leaves(root));
-        System.out.println(averageDegree(root));
-        System.out.println(search(root, 2));
+        // System.out.println(leaves(root));
+        // System.out.println(averageDegree(root));
+        // System.out.println(search(root, 2));
+        // print(root);
+        // System.out.println();
+        // System.out.println(insert(root, 6));
+        // print(root);
+        // System.out.println();
+        // print(delete(root, 20));
+        // System.out.println();
+        // print(delete(root, 15));
+        // System.out.println();
+        print(delete(root, 5));
+        System.out.println();
 	}
 	
 	public static int depth(Node binaryTree, int target){
@@ -136,45 +147,76 @@ public class Main
 	        if(copyRoot.data == e){
 	            return false;
 	        }
-	        else if (){
-	            
+	        else if (copyRoot.data > e){
+	            if(copyRoot.left==null){
+	                copyRoot.left = toInsert;
+                    return true;
+	            }
+    	        copyRoot = copyRoot.left;
+	        }
+	        else if (copyRoot.data < e){
+                if(copyRoot.right==null){
+	                copyRoot.right = toInsert;
+                    return true;
+	            }
+    	        copyRoot = copyRoot.right;
 	        }
 	    }
-	    // 3 cases, insert at the left subtree having childs, right subtree having childs, insert directly at leaf
-	    
-	    
+	    return false;
 	}
 	
-	public static boolean delete(Node root, int e){
-	    Node copyRoot = root;
-	    // Find the target element to delete
-	    while(copyRoot!=null){
-	    // 3 cases, delete node having 0 child, delete node having 1 child, delete node having 2 children
-	        if(copyRoot.data == e){
-	            // is a leaf
-	            if (copyRoot.left == null && copyRoot.right == null){
-	                copyRoot = null;
-	            }
-	            // having 2 children
-	            else if(copyRoot.left != null && copyRoot.right != null){
-	                
-	            }
-	            // having a child
-	            else{
-	                if (copyRoot.left == null){
-	                    copyRoot = copyRoot.right;
-	                }
-	            }
-	        }
-	        else if (copyRoot.data>e){
-	            copyRoot=copyRoot.left;
-	        }
-	        else{
-	            copyRoot=copyRoot.right;
-	        }
+	static Node getSuccessor(Node curr) {
+        curr = curr.right;
+        while (curr != null && curr.left != null) {
+            curr = curr.left;
+        }
+        return curr;
+    }
+    
+    static Node getPredecessor(Node curr) {
+        curr = curr.left;
+        while (curr != null && curr.right != null) {
+            curr = curr.right;
+        }
+        return curr;
+    }
+	
+	public static Node delete(Node root, int e){
+	    // Delete Condition
+	    if(root==null) {
+	        return root;
 	    }
+	    // 3 cases, delete node having 0 child, delete node having 1 child, delete node having 2 children
+	    if(root.data>e) {
+            root.left = delete(root.left, e);
+        }
+        else if (root.data<e) {
+            root.right = delete(root.right, e);
+        }
+        else {
+            // is a leaf / having a child
+            if (root.left == null) return root.right;
+            if (root.right == null) return root.left;
+            // having 2 children, can be solved with predecessor as well. (rightmost element of left subtree)
+            // Successor Logic
+            Node succ = getSuccessor(root);
+            root.data = succ.data;
+            root.right = delete(root.right, succ.data);
+            // Predecessor Logic
+            // Node pre = getPredecessor(root);
+            // root.data = pre.data;
+            // root.left = delete(root.left, pre.data);
+        }
 	    
-	    
+	    return root;
 	}
+	
+	public static void print(Node root){
+        if(root == null) return;
+    
+        print(root.left);
+        System.out.print(root.data + " ");
+        print(root.right);
+    }
 	
 }
