@@ -24,6 +24,13 @@ public class Main
         
         
         print(root);
+        // root = delete(root, 30); 
+        // print(root);
+        // root = delete(root, 50); 
+        // System.out.println();
+        // print(root);
+        // root = delete(root, 10); 
+        // print(root);
 	}
 	
 	static int height(AVLTree node){
@@ -97,7 +104,6 @@ public class Main
 	    return newroot;
 	}
 	
-	
 	static AVLTree rightRotate(AVLTree avlTree){
 	    AVLTree newroot = avlTree.left;
 	    AVLTree rightLeftPart = newroot.right;
@@ -107,7 +113,6 @@ public class Main
 	    
 	    return newroot;
 	}
-	
 	
 	static AVLTree getSuccessor(AVLTree curr) {
         curr = curr.right;
@@ -151,6 +156,29 @@ public class Main
             // root.data = pre.data;
             // root.left = delete(root.left, pre.data);
         }
+        if(root == null){
+            return root;
+        }
+        
+        // Update height of this ancestor node 
+        
+        root.height = 1 + Math.max(height(root.left), height(root.right));
+        
+        int bf = balancingFactor(root);
+        if(-1>bf && balancingFactor(root.right)>0){
+            root.right = rightRotate(root.right);
+            return leftRotate(root);
+        }
+        else if (-1>bf && balancingFactor(root.right)<0){
+            return leftRotate(root);
+        }
+        else if (1<bf && balancingFactor(root.left)>0){
+            return rightRotate(root);
+        }
+        else if (1<bf && balancingFactor(root.left)<0){
+            root.left = leftRotate(root.left);
+            return rightRotate(root);
+        }
 	    
 	    return root;
 	}
@@ -162,4 +190,5 @@ public class Main
         System.out.print(root.data + " ");
         print(root.right);
     }
+	
 }
