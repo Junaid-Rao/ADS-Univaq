@@ -55,11 +55,9 @@ public class Main
     		return;
     	}
     	int mid = (first+last)/2;
-    	if(last > first){
-    		mergeSort(arr, first, mid);
-    		mergeSort(arr, mid+1, last);
-    		merge(arr, first, mid, last);
-    	}
+    	mergeSort(arr, first, mid);
+    	mergeSort(arr, mid+1, last);
+    	merge(arr, first, mid, last);
     }
     public static void print(int[] arr){
         for (int i=0; i<arr.length; i++){
