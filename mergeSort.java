@@ -3,50 +3,34 @@ public class Main
     static void merge(int[] arr, int first, int mid, int last){
     	int[] resArray = new int[last-first+1];
     	// Conquering the sorting of elements from both arrays
-    	int n1 = mid-first+1;
-    	int n2 = last-mid;
-    	
-    	// Creating separate arrays for both ends (left and right)
-    	
-    	int[] arr1 = new int[n1];
-    	int[] arr2 = new int[n2];
-    	
-    	// store elements
-    	for (int i = 0; i < n1; i++){
-    	    arr1[i]=arr[first+i];
-    	}
-    	for (int i = 0; i < n2; i++){
-    	    arr2[i]=arr[mid+1+i];
-    	}
+    	int i = first;
+    	int j = mid+1;
+		int k = 0;
     	
     	// compare and copy to resArray
     	
-    	int count = 0;
-    	int i = 0;
-    	int j = 0;
-    	
-    	while(i<n1 && j<n2){
-    		if (arr1[i] > arr2[j]){
-    			resArray[count++] = arr2[j++];
+    	while(i<=mid && j<=last){
+    		if (arr[i] >= arr[j]){
+    			resArray[k++] = arr[j++];
     		}
     		else{
-    			resArray[count++] = arr1[i++];
+    			resArray[k++] = arr[i++];
     		}
     	}
     	
     	// copy remaining elements from either of the array.
     	
-    	while(i<n1){
-    	    resArray[count++] = arr1[i++];
+    	while(i<=mid){
+    	    resArray[k++] = arr[i++];
     	}
     	
-    	while(j<n2){
-    	    resArray[count++] = arr2[j++];
+    	while(j<=last){
+    	    resArray[k++] = arr[j++];
     	}
     	
     	// copy back to original array.
-    	for (int k = 0; k < resArray.length; k++) {
-            arr[first + k] = resArray[k];
+    	for (int x = 0; x < resArray.length; x++) {
+            arr[first + x] = resArray[x];
         }
     }
 
