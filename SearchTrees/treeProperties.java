@@ -48,15 +48,15 @@ public class Main
 	    return dist;
 	}
 	
-	public static int recursiveDepth1(Node r) {
+	public static int recursiveHeight(Node r) {
         // Base case
         if (r == null) {
             return 0;
         }
 
         // Recursive calls
-        int leftDepth = recursiveDepth1(r.left);
-        int rightDepth = recursiveDepth1(r.right);
+        int leftDepth = recursiveHeight(r.left);
+        int rightDepth = recursiveHeight(r.right);
 
         // Return height
         return 1 + Math.max(leftDepth, rightDepth);
