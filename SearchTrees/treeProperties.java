@@ -171,6 +171,19 @@ public class Main
 	    }
 	    return false;
 	}
+
+	public static Node insertRecursively(Node root, int e) {
+	    if (root == null) {
+	        return new Node(e);
+	    }
+	    if (e < root.data) {
+	        root.left = insertRecursively(root.left, e);
+	    } 
+	    else if (e > root.data) {
+	        root.right = insertRecursively(root.right, e);
+	    }
+	    return root;
+	}
 	
 	static Node getSuccessor(Node curr) {
         curr = curr.right;
