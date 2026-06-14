@@ -19,6 +19,8 @@ public class Main
         bfs(root);
         System.out.println();
         dfs(root);
+        System.out.println();
+        dfsRecursive(root);
 	}
 	
 	public static void genericVisit(Node root) {
@@ -72,4 +74,20 @@ public class Main
             }
         }
     }
+    
+    public static void dfsRecursive(Node root) {
+        if (root == null) {
+            return;
+        }
+    
+        // Visit node
+        System.out.print(root.data + " ");
+    
+        // Traverse left subtree
+        dfsRecursive(root.left);
+    
+        // Traverse right subtree
+        dfsRecursive(root.right);
+    }
+
 }
