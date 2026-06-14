@@ -94,17 +94,10 @@ public class Main
 	    if(root == null){
 	        return 0;
 	    }
-	    int left = 0, right = 0;
 	    if (root.left == null && root.right == null) {
 	        return 1;
 	    }
-	    if(root.left != null){
-	        left = leaves(root.left);
-	    }
-	    if(root.right != null){
-	        right = leaves(root.right);
-	    }
-	    return left+right;
+	    return leaves(root.left)+leaves(root.right);
 	}
 	
 	// Caculate Average Degree of Binary Tree by taking help of numberOfNodes
